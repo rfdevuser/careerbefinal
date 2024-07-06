@@ -103,7 +103,7 @@ const StudentDataTable: React.FC = () => {
     if (error) return <p className="text-center mt-4">Error: {error.message}</p>;
 
     return (
-        <div className="container mx-auto mt-4">
+        <div className="container mx-auto mt-4 bg-white h-screen">
             {/* Filter controls */}
             <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center space-x-4">
