@@ -215,7 +215,16 @@ const StudentDataTable: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.answer3}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.answer4}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.answer5}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.resume}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">  {candidate.resume && (
+        <a
+            href={candidate.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700"
+        >
+            View here
+        </a>
+    )}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.submission_date}</td>
                                 </tr>
                             ))
