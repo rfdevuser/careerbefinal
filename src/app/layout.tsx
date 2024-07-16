@@ -2,11 +2,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ApolloProvider } from "@apollo/client";
-import client from '@/utils/Apollo/ApolloClient'
+// import { ApolloProvider } from '@apollo/client';
 const inter = Inter({ subsets: ["latin"] });
-
-
+import client from '@/utils/apollo/ApolloClient';
+import { ApolloProvider } from "@apollo/client";
+import Navbar from '@/components/navbar'
+import Footer from '@/components/Footer';
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -14,10 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>  <meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
       <body className={inter.className}>
-        <ApolloProvider client={client}>
+      <ApolloProvider client={client}>
+        <Navbar/>
         {children}
-        </ApolloProvider></body>
+        <Footer/>
+        </ApolloProvider>
+
+        </body>
+        
     </html>
   );
 }
