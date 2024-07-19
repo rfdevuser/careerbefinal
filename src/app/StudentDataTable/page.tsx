@@ -4,6 +4,8 @@ import { useQuery, useMutation } from '@apollo/client';
 import { CANDIDATE_INFO } from '@/utils/gql/GQL_QUERIES';
 import { DELETE_CANDIDATE_RESPONSE } from '@/utils/gql/GQL_MUTATION';
 import { BallTriangle } from 'react-loader-spinner';
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage } from "@/firebase";
 
 // Define the Candidate interface here
 interface Candidate {
@@ -30,6 +32,9 @@ interface Candidate {
 }
 
 const StudentDataTable: React.FC = () => {
+    const [contactNumber, setContactNumber] = useState<string>("");
+    const [resumeUrl, setResumeUrl] = useState<string | null>(null);
+
     const { loading, error, data, refetch } = useQuery(CANDIDATE_INFO);
     const [deleteCandidate] = useMutation(DELETE_CANDIDATE_RESPONSE);
 
@@ -38,6 +43,20 @@ const StudentDataTable: React.FC = () => {
     const [experienceFilter, setExperienceFilter] = useState<{ min: number; max: number }>({ min: 0, max: 20 });
     const [contactFilter, setContactFilter] = useState<string>('');
     const [cityFilter, setCityFilter] = useState<string>('');
+
+    const viewResume = (contact: string) => {
+        const resumeRef = ref(storage, `images/${contact}`);
+        getDownloadURL(resumeRef)
+ 
+            .then((url) => {
+                       console.log(contact)
+                window.open(url, "_blank");
+            })
+            .catch((error) => {
+                console.error("Error fetching resume: ", error);
+                // Handle errors here
+            });
+    };
 
     // Handle delete function
     const handleDelete = async (contact: string) => {
@@ -183,7 +202,9 @@ const StudentDataTable: React.FC = () => {
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Answer 3</th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Answer 4</th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Answer 5</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resume</th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Linkedin/Portfolio</th>
+                            
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">View Resume</th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submission Date</th>
                         </tr>
                     </thead>
@@ -215,22 +236,31 @@ const StudentDataTable: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.answer3}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.answer4}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.answer5}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">  {candidate.resume && (
-        <a
-            href={candidate.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:text-blue-700"
-        >
-            View here
-        </a>
-    )}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.resume && (
+                                        <a
+                                            href={candidate.resume}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-500 hover:text-blue-700"
+                                        >
+                                            View here
+                                        </a>
+                                    )}</td>
+                                  
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <button
+                                            onClick={() => viewResume(candidate.contact)}
+                                            className="text-blue-500 hover:text-blue-700"
+                                        >
+                                            View Resume
+                                        </button>
+                                    </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{candidate.submission_date}</td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium" colSpan={19}>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium" colSpan={20}>
                                     No candidates found
                                 </td>
                             </tr>

@@ -1,6 +1,4 @@
-html, body {
-  overflow-x: hidden;
-}
+/* styles.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,109 +26,58 @@ body {
     text-wrap: balance;
   }
 }
-.feature-card:hover {
-  background: var(--black-gradient);
-  box-shadow: var(--card-shadow);
-}
-
-.feedback-card {
-  background: rgb(237, 235, 235);
-}
-
-/* .feedback-card:hover {
-  background: var(--black-gradient);
-} */
-
-.bg-blue-gradient {
-  background: linear-gradient(
-    157.81deg,
-    #def9fa -43.27%,
-    #bef3f5 -21.24%,
-    #9dedf0 12.19%,
-    #7de7eb 29.82%,
-    #5ce1e6 51.94%,
-    #33bbcf 90.29%
-  );
-}
-
-.slider-container {
-  @apply w-full;
-}
-.slick-dots {
-  background-color: white;
-}
-
-/* TICKER START */
-.hmove { display: flex; }
-.hitem { width: 100%; flex-shrink: 0; }
-.hwrap { overflow: hidden; }
-
-/* (A2) MOVE ITEMS FROM RIGHT TO LEFT */
-/* first item = 0, fourth item = -300% */
-@keyframes tickerh {
-  0% { transform: translatex(100%); }
-  100% { transform: translatex(-400%); }
-}
-.hmove { animation: tickerh linear 50s infinite; }
-.hmove:hover { animation-play-state: paused; }
-@media screen and (max-width: 768px) {
-  .hmove { animation: tickerh linear 20s infinite; }
-}
-/* (A3) COSMETICS - NOT IMPORTANT */
-.hwrap {
-  font-family: "Courier New", Courier, monospace;
-  color: white;
-  background: #831843;
-  max-width: 100%; /* highly recommended */
-}
-.hitem { 
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-}
-.hwrap, .hwrap * { box-sizing: border-box; }
-
-/* Reduce margin between title and ticker */
-#cbtitle {
-  margin-bottom: 10px; /* Adjust as needed */
-}
-
-/* Reduce margin between ticker and information section */
-#cbinfo {
-  margin-top: 10px; /* Adjust as needed */
-}
-
-/* (X) NOT IMPORTANT */
-
-#cbwrap{
-  background:transparent;
-  width:100%;
-  border-radius:10px;
-  margin-top: 60px;
-}
-*{
-  box-sizing:border-box;
-  font-family:arial,sans-serif;
-}
-/* body{
-  padding:0;
-  margin:0;
-  border:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background-size:cover;
-  background-position:center;
-  backdrop-filter:blur(10px);
-} */
-#cbinfo a{
-  text-decoration:none;
-  padding:5px;
-  color:white;
-  background:#a91616;
-}
-
-/* TICKER END */
 
 
+/* table css */
+.table-container {
+  overflow-x: auto; /* Enable horizontal scrolling if table overflows */
+  padding: 20px; /* Add padding around the table */
+}
+
+.student-table {
+  width: 100%; /* Full width table */
+  border-collapse: collapse; /* Collapse table borders */
+}
+
+.student-table th,
+.student-table td {
+  border: 1px solid #dddddd; /* Border for each cell */
+  padding: 12px; /* Padding inside each cell */
+  text-align: left; /* Align text to the left within cells */
+}
+
+.student-table th {
+  background-color: #f2f2f2; /* Background color for header cells */
+  font-weight: bold; /* Make header text bold */
+  width: 100px;
+}
+
+.student-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row background color */
+}
+
+.student-table tr:hover {
+  background-color: #e6f7ff; /* Hover color for rows */
+}
+
+.delete-button {
+  background-color: #f44336; /* Red background */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 8px 16px; /* Padding around text */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+
+
+.delete-button {
+  padding: 6px 12px; /* Padding for the delete button */
+  background-color: #d61919; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove button border */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.delete-button:hover {
+  background-color: #ff6666; /* Hover background color */
+}

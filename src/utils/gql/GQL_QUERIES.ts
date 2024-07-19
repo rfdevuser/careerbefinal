@@ -1,44 +1,29 @@
 import { gql } from '@apollo/client';
 
-export const JOBSINFO = gql`
-
- query MyQuery {
-  querryofalljobs {
+export const CANDIDATE_INFO = gql`
+query MyQuery {
+  candidatesInfo {
+    answer1
+    answer2
+    answer3
+    answer5
+    answer4
+    city
+    contact
+    email
+    gender
     id
     job_id
-    job_title
-    job_brief
-    job_responsibility
-    job_requirement
-    job_salary
-    job_location
-    question1
-    question2
-    question3
-    question4
-    question5
+    name
+    passing_year
+    qualification
+    resume
+    student
+    submission_date
+    working_professional
+    year_of_experience
   }
 }
-
-`;
-export const SINGLEJOBRESULT = gql`
-  query JobInfo($job_id: String!) {
-    jobInfo(job_id: $job_id) {
-      id
-      job_id
-      job_title
-      job_brief
-      job_responsibility
-      job_requirement
-      job_salary
-      job_location
-      question1
-      question2
-      question3
-      question4
-      question5
-    }
-  }
 `;
 
 
